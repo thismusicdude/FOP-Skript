@@ -86,4 +86,12 @@ Auswertung: Nachschlagen des dem Namen zugewiesenen Wertes.
 \subsubsection{Besonderheiten bei Zahlen}
 DrRacket rechnet immer genau, wenn das möglich ist. Ganze und endliche Zahlen berechnet er wie so wie es
 "üblich ist".
-Brüche mit periodischem Ergebnis werden ebenfalls in einem Text als bruch - etwa "7/3" dargestellt.
+Brüche mit periodischem Ergebnis werden ebenfalls in einem Text als Bruch - etwa \fbox{\textit{7/3}} dargestellt. Im Programm werden sie jedoch als Periode angezeigt. Beispielsweise \fbox{- 2.\uline{3}}.
+Doch können nicht jede Zahlen \textbt{exakt} dargestellt werden.
+Man wird hier durch die verwendung des Binärsystems eingeschränkt. Es gilt "je mehr Nachkommastellen die Zahl besitzt, desto ungenauer wird in der Regel ihre Darstellung im Binärsystem"
+Zahlen unendlicher Länge ohne Periode werden wie folgt dargestellt: \fbox{\#i \"'inexact\"'}\\
+Hier einige Beispiele
+$$e: \fbox{\#i2.718281828459045}$$
+$$pi: \fbox{\#i3.141592653589793}$$
+$$\sqrt{2}: \fbox{\#1.4142135623730951}$$
+$$$$
