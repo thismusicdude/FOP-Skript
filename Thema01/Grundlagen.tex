@@ -2,7 +2,7 @@
 \chapter{Grundlagen der Programmierung}
 \label{c:grundlagen}
 \setcounter{page}{1}
-\section{Was ist Progrmamieren?}
+\subsubsection{Was ist Progrmamieren?}
 
 Schauen wir zunächsteinmal, was einige der „großen Köpfe“ der
 Informatik das Programmieren definieren.
@@ -17,6 +17,9 @@ Informatik das Programmieren definieren.
 	Understood and Sloppily Formulated Ideas“\\
 	\textit{~ Marvin Minsky, Gerald J. Sussman}
 \end{quote}
+
+\subsubsection{Strukturierungsmechanismen einer
+Programmiersprache}
 
 Eine Programmiersprache ist mehr als ein Hilfsmittel um einen
 Computer anzuweisen, Aufgaben durchzuführen. 
@@ -44,8 +47,7 @@ um Prozessideen zu strukturieren:
 		\subitem - Im Deutschen: Definition eines Begriffs („Ein Auto ist ...“), so dass der Begriff danach als „Kurzform“ für die Erklärung nutzbar ist
 \end{itemize}
 
-\textbf{Strukturierungsmechanismen in der Elektronik:}
-
+\subsubsection{Strukturierungsmechanismen in der Elektronik:}
 \begin{itemize}
 	\item \textbf{\textit{Primitive} Ausrücke}
 		\subitem - Widerstände, Kondensatoren, Induktivitäten, Spannungsquellen, ...
@@ -61,4 +63,27 @@ um Prozessideen zu strukturieren:
 		Einheit: z.B. Verstärker, Regler, Empfänger, Sender, ...
 \end{itemize}
 
+\subsubsection{Sprachelementen - Die Primitiven}
+\textbf{Zahlen} \\
+Zahlen sind selbstauswertend: Die Werte der Zifferfolge ist die Zahl,
+die, die sie bezeichnen. 
+$$ 23 \Rightarrow 23 $$
+$$ -36 \Rightarrow -36 $$ 
+\\
 
+\textbf{Boolesche Werte} \\
+Boolsche Werte können nur \textit{wahr} oder \textit{falsch} sein. Diese sind ebenfalls
+selbstauswertend. Sie werden als $$True oder False$$ bezeichnet.\\
+
+
+Prozeduren sind in der Programmierung auch als "Funktionen" oder Methoden bekannt. Beispiele sind hierfür sind
+$$ +, *, /, -, =, usw.$$
+Aber was ist der Wert von so einem Ausdruck? Der Wert von + ist eine Prozedur, die Zahlen addiert.
+Dies werden wir später als "Higher-Order Procedures" kennen lernen.
+% Was auch immer das folgende beeutet. steht aber so in den Folien :)
+Auswertung: Nachschlagen des dem Namen zugewiesenen Wertes.
+
+\subsubsection{Besonderheiten bei Zahlen}
+DrRacket rechnet immer genau, wenn das möglich ist. Ganze und endliche Zahlen berechnet er wie so wie es 
+"üblich ist".
+Brüche mit periodischem Ergebnis werden ebenfalls in einem Text als bruch - etwa "7/3" dargestellt.
