@@ -1,1 +1,30 @@
 \chapter{Rekursive Datentypen und Strukturelle Rekursion}
+\section{Listen}
+Mit strukturen können Datenobjekte mit einer festen Zahl von Daten gespeichert werden. Häufig wissen wir jedoch nicht, aus wie vielen Datenelementen eine Datenstruktur besteht.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Oder die struktur der Daten ist rekursiv
+%???? KEINE AHNUNG WAS MIT DEM LETZTEN SATZ GEMEINT IST!!!
+Mit rekursiven Datentypen können auch beliebig große Datenobjekte strukturiert abgespeichert werden. Die Idee davon ist die Folgende: Ein Element der Datenstruktur speichert (direkt oder indirekt) ein Exemplar der Datenstruktur. Dies nennt man dann eine \textit{rekursive Datenstruktur}. Um eine \uline{endliche} Datenstruktur zu bekommen benötigt man einen \textit{Rekursionsanker}. Diesen Rekursionsanker modellieren wir mit der Technik zu heterogenen Daten aus dem letzten Kapitel.
+
+\section{Modellierung eines rekursiven Datentyps}
+
+Eine Liste ist entweder die leere Liste the-emtpylst, oder (amke-lst s r), wobei s ein Wert ist und r eine Liste.
+
+\begin{lstlisting}{t03-prog1}
+;; a list with 0 elements
+;; (define list0 the-emptylst)
+(define list0 empty)
+
+;; a list with 1 element
+;; (define list1 (make-lst 'a the-emptylst))
+(define list1 (cons 'a empty))
+
+;; a list with 2 elements
+;; (define list2 (make-lst 'a
+;;               (make-lst 'b the-emptylst)))
+(define list2 (cons 'a (cons 'b empty)))
+
+;; get the 2nd element from list2
+;; (lst-first (lst-rest list2)) -> 'b
+(first (rest list2)) ;; -> 'b
+\end{lstlisting}

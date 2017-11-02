@@ -6,3 +6,7 @@ Funktionale und Objektorientierte Programmierung || Skript nach Prof. Dr. rer. n
 Textausgaben im Text in einer Box:
 
 benutzt hierfür den Befehl \\fbox{}
+
+Code im Text im folgenden Format:
+
+\\begin{lstlisting}{t<ThemaNummer>-prog<Nummer>}
