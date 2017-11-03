@@ -5,14 +5,16 @@ Funktionale und Objektorientierte Programmierung || Skript nach Prof. Dr. rer. n
 
 Wenn Textausgaben im Textdargestellt werden sollen, so bitte in einer Box:
 
-benutzt hierfür den Befehl \\fbox{TEXT IN DER BOX}
+benutzt hierfür den Befehl `\fbox{TEXT IN DER BOX}`
 Für den fall dass es mehrere Zeilen sind habe ich noch nichts rausgesucht
 
 Code dargestellt im Text bitte in folgendem Format:
 
-\\begin{lstlisting}{t\<ThemaNummer\>-prog\<Nummer\>}
+```tex
+\begin{lstlisting}{t\<ThemaNummer\>-prog\<Nummer\>}
 CODE;
 CODE;
 CODE;
-\\end{lstlisting}
+\end{lstlisting}
+```
 
