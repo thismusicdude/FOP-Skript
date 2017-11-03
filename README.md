@@ -3,10 +3,12 @@ Funktionale und Objektorientierte Programmierung || Skript nach Prof. Dr. rer. n
 
 ## Richtlinien:
 
-Textausgaben im Text in einer Box:
+Wenn Textausgaben im Textdargestellt werden sollen, so bitte in einer Box:
 
-benutzt hierfür den Befehl \\fbox{}
+benutzt hierfür den Befehl \\fbox{TEXT IN DER BOX}
+Für den fall dass es mehrere Zeilen sind habe ich noch nichts rausgesucht
 
-Code im Text im folgenden Format:
+Code dargestellt im Text bitte in folgendem Format:
 
 \\begin{lstlisting}{t<ThemaNummer>-prog<Nummer>}
+\\end{lstlisting}
