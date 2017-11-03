@@ -10,5 +10,9 @@ Für den fall dass es mehrere Zeilen sind habe ich noch nichts rausgesucht
 
 Code dargestellt im Text bitte in folgendem Format:
 
-\\begin{lstlisting}{t<ThemaNummer>-prog<Nummer>}
+\\begin{lstlisting}{t\<ThemaNummer\>-prog\<Nummer\>}
+CODE;
+CODE;
+CODE;
 \\end{lstlisting}
+
