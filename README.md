@@ -5,11 +5,12 @@ Funktionale und Objektorientierte Programmierung || Skript nach Prof. Dr. rer. n
 
 Wenn Textausgaben im Textdargestellt werden sollen, so bitte in einer Box:
 
-benutzt hierfür den Befehl `\fbox{TEXT IN DER BOX}`
+benutzt hierfür den Befehl ```tex \fbox{TEXT IN DER BOX}```
 
 Für längeren Text:
     
-```\noindent\fbox{ 
+```tex
+\noindent\fbox{ 
     \parbox\{\textwidth}{
         The quick brown fox jumps right over the lazy dog. 
         the quick brown fox jumps right over the lazy dog. 
