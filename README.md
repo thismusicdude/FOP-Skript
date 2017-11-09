@@ -5,7 +5,10 @@ Funktionale und Objektorientierte Programmierung || Skript nach Prof. Dr. rer. n
 
 Wenn Textausgaben im Textdargestellt werden sollen, so bitte in einer Box:
 
-benutzt hierfür den Befehl ```tex \fbox{TEXT IN DER BOX}```
+benutzt hierfür den Befehl 
+```tex 
+\fbox{TEXT IN DER BOX}
+```
 
 Für längeren Text:
     
