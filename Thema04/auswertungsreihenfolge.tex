@@ -1,0 +1,35 @@
+\chapter{Auswertungsreihenfolge und Lexikalisches Scoping}
+
+\section{Intermezzo: Syntax und Semantik der HtDP-TL}
+
+\subsection{Syntax}
+Ähnlich wie die natürlichen Sprachen haben auch die
+Programmiersprachen ein Vokabular und eine Grammatik. Das Vokabular ist eine Sammlung der "Wörter", aus denen wir Sätze" in unserer Sprache bilden können. Ein Satz in einer Programmiersprache ist ein Ausdruck oder eine Funktion. Die Grammatik der Sprache sagt uns, wie wir ganze Sätze aus Wörtern bilden. Der Ausdruck Syntax bezieht sich auf Vokabular und Grammatik von Programmiersprachen.
+
+\subsection{Semantik}
+
+Nicht alle grammatikalisch richtigen Sätze sind sinnvoll, weder in Deutsch noch in Programmiersprachen. "Die Katze ist schwarz" ist ein sinnvoller Satz. "Der Ziegel ist ein Auto" macht wenig Sinn, auch wenn der Satz grammatikalisch richtig ist.
+
+Um herauszufinden ob ein Satz sinnvoll ist, müssen wir die
+Bedeutung (Semantik) der Wörter und Sätze verstehen. Für Programmiersprachen gibt es verschiedene Wege, um den Sinn
+von einzelnen Sätze/Ausdrücken zu erklären. Den Sinn von HtDP-TL-Programmen diskutieren wir mit einer Erweiterung der bekannten Gesetze aus Arithmetik und Algebra (Substitutionsmodell).
+
+Es existieren vier Kategorien von Wörtern und jedes Wort ist durch eine Zeile definiert.
+\begin{itemize}
+	\item Variablen <var>: Namen von Werten
+	\item Funktionen <fct>: Namen von Funktionen
+	\item Konstanten <con>: boolean, Symbole, numerische Konstanten
+	\item Primitive Operationen <prm>: Die Grundfunktionen, die HtDP-TL von Anfang an zur Verfügung stellt
+\end{itemize}
+
+Die Notation geschieht wie folgt:
+Zeilen zählen einfache Beispiele auf, getrennt durch ein „|“ und Punkte bedeuten, dass es noch mehr Dinge derselben Art in der Kategorie gibt
+
+\noindent\fbox{%
+    \parbox{\textwidth}{%
+		<var> = x | a | alon | ... \\
+		<fct> = area-of-disk | perimeter | ...\\
+		<con> = true | false | 'a | 'doll | 'sum | ... | 1 | -1 | 3/5 / 1.22 | ...\\
+		<prm> = + | - | * | ...\\
+    }%
+}

@@ -8,33 +8,22 @@
     % Dokumentinformationen
 
     % FONTS
-    \usepackage[utf8]{inputenc}				% UTF-8 Zeichensatz
-    \usepackage[ngerman]{babel}				% Alle Bezeichnungen auf die deutsche Sprache anpassen
-    \usepackage[T1]{fontenc}				% Unterstützung für westeuropäische Codierung(Umlaute)
-
-
-    \usepackage{fancyhdr}					% Einfache Bearbeitung von Kopf- und Fußzeile
-
-    \usepackage{graphicx}					% Grafiken einbinden
-    \usepackage{subfig}						% Abbildungen und Tabellen
-    %\graphicspath{{Anhang/bilder/}}		% Pfad zu Grafiken
-
-    \usepackage{lmodern}					% Verändert die Schriftart auf "Latin Modern"
-    \usepackage{color}						% Farbenmanagement
+    \usepackage[utf8]{inputenc}
+    \usepackage[ngerman]{babel}
+    \usepackage[T1]{fontenc}
+    \usepackage{fancyhdr}
+    \usepackage{graphicx}
+    \usepackage{lmodern}
+    \usepackage{color}
     \usepackage{booktabs}
-
-    \usepackage[onehalfspacing]{setspace}	% Abstände
-    \usepackage{geometry}					% Seiten-Layout
+    \usepackage[onehalfspacing]{setspace}
+    \usepackage{geometry}
     \usepackage{authblk}
     \usepackage{longtable}
-    % Zusätzliche Schriftzeichen der American Mathematical Society
     \usepackage{amsfonts}
     \usepackage{amsmath}
-
-    \usepackage{pdfpages}
-
-    %Erweiterte Referenzen
-    \usepackage{hyperref}
+		\usepackage{pdfpages}
+		\usepackage{hyperref}
     \usepackage[ngerman, nameinlink, noabbrev]{cleveref}
 
     % C++ Code Gedöns
@@ -46,15 +35,11 @@
     \usepackage{chngcntr}
     \counterwithout{figure}{chapter}
     \counterwithout{table}{chapter}
-
-    % Underlining
-    \usepackage{ulem}
-
-    \usepackage{fancybox}
+		\usepackage{ulem}
+		\usepackage{fancybox}
     % Style
     \pagestyle{fancy}
 
-    % Kopfzeile
     \lhead{ }
     \chead{ }
     \rhead{ }
@@ -89,10 +74,9 @@
 
     \title{
       Funktionale und Objektorientierte Programmierung\\
-      \large Dieses Skript richtet sich nach der Vorlesung von \\ Prof. Dr. rer. nat. Karsten Weihe}
+      \large ---- \\Dieses Skript richtet sich nach der Vorlesung von \\ Prof. Dr. rer. nat. Karsten Weihe \\ Formulierungen sind teils von den Folien übernommen.}
 
     \date{\today}
-    \author{Max Schmitt}
     \affil{Technische Universität Darmstadt}
     \maketitle
     %\cleardoublepage{}
@@ -127,7 +111,7 @@
     \include{Thema01/contract}
     \include{Thema02/structdata}
     \include{Thema03/rekdata_structrek}
-
+		\include{Thema04/auswertungsreihenfolge}
     \appendix
 
     \end{document} %Process exited with error(s)
