@@ -2,6 +2,10 @@
 Funktionale und Objektorientierte Programmierung || Skript nach Prof. Dr. rer. nat. Karsten Weihe und den Folien von Dr. Guido Rößling und Prof. Dr. Max Mühlhäuser
 
 ## Richtlinien:
+### Bitte
+bitte committet nicht die main.pdf ist doof für mich fürs mergen ;) ich werde sie schon oft genug aktualisieren ;)
+
+### LaTex Formatierung:
 
 Wenn Textausgaben im Textdargestellt werden sollen, so bitte in einer Box:
 
@@ -33,3 +37,4 @@ CODE;
 \end{lstlisting}
 ```
 
+Danke für eure Mitarbeit
