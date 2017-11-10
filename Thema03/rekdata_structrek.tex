@@ -115,4 +115,123 @@ In den folgenden Beispielen sehen wir: Listen speichern beliebige Datentypen, au
     (cons true empty)))
 \end{lstlisting}
 \section{Abgeschlossenheitseigenschaft}
-Eine Operation zum Kombinieren von Daten besitzt die Abgeschlossenheitseigenschaft, wenn die Ergebnisse der Kombination von Datenobjekten wiederum mit der Operation kombiniert werden können. Betrachten wir hier \textit{cons} als Beispiel.
+Eine Operation zum Kombinieren von Daten besitzt die Abgeschlossenheitseigenschaft, wenn die Ergebnisse der Kombination von Datenobjekten wiederum mit der Operation kombiniert werden können.  \textit{cons} ist hier ein gutes Beispiel. Solche Kombinationsoperatoren können verwendet werden, um hierarchische Daten aufzubauen. \\\
+Doch sind wir der Abgeschlossenheit schon einmal begegnet?\\
+Der Ursprung des Begriffs „Abgeschlossenheit“ (engl. closure) kommt aus der abstrakten Algebra. Es gilt:
+\begin{quote}
+	Eine Menge von Elementen ist abgeschlossen bezüglich einer Operation, wenn die Anwendung der Operation an Elementen der Menge wieder ein Element der Menge produziert.
+\end{quote}
+Der Gedanke, dass ein Mittel der Kombination die Abgeschlossenheitseigenschaft besitzen soll, ist intuitiv, jedoch erfüllen Kombinationsoperatoren vieler Programmiersprachen diese nicht. So kann man Elemente kombinieren, indem man diese in Arrays (->T11.84ff) speichert. Man kann aber unter Umständen keine Arrays aus Arrays zusammenstellen bzw. als Rückgabewerte von Prozeduren verwenden. Es fehlt ein eingebauter „Universalkleber“, der es einfacher macht, zusammengesetzte Daten in einer uniformen Art und Weise zu manipulieren.
+
+\subsection{list Konstruktor}
+Längere Listen mit \textit{cons} zu erzeugen ist unhandlich, daher gibt es in den HtDP-TL den Konstruktor \textit{list}. Dieser bekommt eine beliebige Menge von Argumenten und erzeugt eine Liste mit allen Argumenten als Elementen. Als Beispiel:
+
+\begin{lstlisting}{t03-prog7}
+(list 1 2 3)
+\end{lstlisting}
+statt
+\begin{lstlisting}{t03-prog7}
+(cons 1 (cons 2 (cons 3 empty)))
+\end{lstlisting}
+oder zum Beispiel:
+\begin{lstlisting}{t03-prog8}
+(list (list 'a 1) (list 'b 2))
+\end{lstlisting}
+
+Allgemein gilt
+\begin{lstlisting}{t03-prog9}
+(list exp-1 ... exp-n)
+\end{lstlisting}
+ äquivalent zu
+\begin{lstlisting}{t03-prog9}
+(cons exp-1 (cons ... (cons exp-n empty))...)
+\end{lstlisting}
+
+\subsection{Der ' oder quote Konstruktor}
+Da Listen wirklich sehr oft eingesetzt werden können einige Listen können mit Hilfe des Quote-Konstruktors ' noch weiter abgekürzt werden.
+\begin{lstlisting}{t03-prog10}
+'(1 2 3)
+\end{lstlisting}
+ist die Kurzform für
+\begin{lstlisting}{t03-prog10}
+(list 1 2 3)
+\end{lstlisting}
+\\
+Ein weiteres Beispiel:
+\begin{lstlisting}{t03-prog11}
+'((1 2) (3 4) (5 6))
+\end{lstlisting}
+steht für
+\begin{lstlisting}{t03-prog11}
+(list (list 1 2) (list 3 4) (list 5 6))
+\end{lstlisting}
+dies sollte man nicht verwechseln mit (list a b c) – list wertet alle
+Argumente aus, quote jedoch nicht. \\Im Allgemeinen bedeutet also
+\begin{lstlisting}{t03-prog12}
+'(e-1 ... e-n)
+\end{lstlisting}
+steht für
+\begin{lstlisting}{t03-prog12}
+(list 'e-1 ... 'e-n)
+\end{lstlisting}
+Achtung:\\
+\textit{'exp-i} ist ein Symbol, wie z.B. \textit{'+'}, \textit{'true}, \textit{'list (!!!)}. Nur für Zahlen gilt \textit{'e-i = e-i}. Beachten Sie, dass diese Regel rekursiv ist! Um list und quote zu verwenden, stellen Sie ab jetzt DrRacket um auf den Sprachlevel “Beginning Student with List Abbreviations” bzw. „Anfänger mit Listen-Abkürzungen“!
+
+\subsection{Verarbeitung rekursiver Datentypen}
+Jetzt kann man sich die Frage stellen wie wir nun unsere Exemplaren rekursiven Datentypen? Die Antwort ist simpel: Wir benutzen unser Designrezept für heterogene Daten.\\
+
+1. Schritt: Definition des Vertrags, Header etc. \\
+Beachten Sie die Konvention (listof XXX), um im Vertrag zu dokumentieren, \\
+was für Daten als Listenelemente erwartet werden.
+\begin{lstlisting}{t03-prog13}
+;; contains-doll?: (listof symbol) -> boolean
+;; to determine whether the symbol 'doll occurs
+;; in a-list-of-symbols
+(define (contains-doll? a-list-of-symbols) ...)
+\end{lstlisting}
+
+2. Schritt: Tabelle erstellen:\\
+Für jeden Datentyp ein cond-Zweig u. Selektoren andeuten\\
+\begin{lstlisting}[firstnumber=4]
+(define (contains-doll? a-list-of-symbols)
+  (cond
+    [(empty? a-list-of-symbols) ...]
+    [(cons? a-list-of-symbols)
+        ... (first a-list-of-symbols) ...
+        ... (rest a-list-of-symbols) ...]))
+\end{lstlisting}\\
+Der Erster Fall (leere Liste) ist trivial
+\begin{lstlisting}[firstnumber=6]
+[(empty? a-list-of-symbols) false]
+\end{lstlisting}
+
+Mit den verfügbaren Daten können wir direkt das erste Element
+der Liste überprüfen.
+
+\begin{lstlisting}[firstnumber=7]
+[(cons? a-list-of-symbols)
+  (cond
+    [(symbol=? (first a-list-of-symbols) 'doll) true]
+    ... (rest a-list-of-symbols) ...]))
+\end{lstlisting}
+Was machen wir mit dem Rest der Liste? Wir brauchen eine Hilfs-Prozedur, die überprüft, ob die (Rest)-Liste das Symbol enthält. Für die Hilfsprozedur nehmen wir \textit{contains-doll?} einfnach selbst. Der folgende Codeteil ist die Lösung.
+
+\begin{lstlisting}
+(define (contains-doll? a-list-of-symbols)
+  (cond
+    [(empty? a-list-of-symbols) false]
+    [(cons? a-list-of-symbols)
+      (cond
+        [(symbol=? (first a-list-of-symbols) 'doll) true]
+        [else (contains-doll? (rest a-list-of-symbols))])]))
+\end{lstlisting}
+
+Hier könnte man sich fragen: Wieso ist die Lösung wohldefiniert? (Wohldefiniert bedeutet hier: "die Ausführung der Prozedur endet") Denn nicht jede rekursive Definition ist wohldefiniert z.B.:
+\begin{lstlisting}
+(define (f a-bool) (f (not a-bool)))
+\end{lstlisting}
+Unsere rekursive Definition ist ein Beispiel für strukturelle
+Rekursion, da Sie Struktur der Prozedur der (rekursiven) Struktur der Daten folgt. Solche rekursiven Definitionen sind stets wohldefiniert, weil die Schachtelungstiefe der Daten in jedem rekursiven Aufruf strikt abnimmt.
+
+\subsection{Design von Prozeduren für rekursive Daten}
+Wie ändert sich also nun unser Designrezept? In der \textbf{Datenanalyse und im Design} ändert ich das folgende: Wenn die Problembeschreibung Informationen beliebiger Größe beschreibt, benötigen wir eine rekursive Datenstruktur. Diese Datenstruktur benötigt mindestens zwei Fälle, von denen mindestens einer weder direkt noch indirekt auf die Definition zurückverweist – also eben \textit{nicht} rekursiv ist. Im \textbf{Template} müssen die rekursiven Zweige den rekursiven Aufruf andeuten. Im \textbf{Prozedurkörper} werden erst die \textit{Basisfälle} (nicht-rekursiv) implementieren, dann die rekursiven Zweige. Für die rekursiven Aufrufe davon ausgehen, dass die Prozedur bereits wie gewünscht funktioniert. Sonst ändert sich nichts weiteres.
