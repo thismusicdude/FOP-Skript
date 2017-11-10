@@ -78,7 +78,6 @@ Dies kann aber nicht verhindern, dass man \textit{make-lst} direkt verwendet. Im
 \begin{lstlisting}{t03-prog4}
 (cons 'Mercury empty)
 \end{lstlisting}
-\\
 \includegraphics[height=2cm]{Bilder/T03_00.png}
 
 \begin{lstlisting}{t03-prog4}
@@ -123,7 +122,7 @@ Der Ursprung des Begriffs „Abgeschlossenheit“ (engl. closure) kommt aus der 
 \end{quote}
 Der Gedanke, dass ein Mittel der Kombination die Abgeschlossenheitseigenschaft besitzen soll, ist intuitiv, jedoch erfüllen Kombinationsoperatoren vieler Programmiersprachen diese nicht. So kann man Elemente kombinieren, indem man diese in Arrays (->T11.84ff) speichert. Man kann aber unter Umständen keine Arrays aus Arrays zusammenstellen bzw. als Rückgabewerte von Prozeduren verwenden. Es fehlt ein eingebauter „Universalkleber“, der es einfacher macht, zusammengesetzte Daten in einer uniformen Art und Weise zu manipulieren.
 
-\subsection{list Konstruktor}
+\section{list Konstruktor}
 Längere Listen mit \textit{cons} zu erzeugen ist unhandlich, daher gibt es in den HtDP-TL den Konstruktor \textit{list}. Dieser bekommt eine beliebige Menge von Argumenten und erzeugt eine Liste mit allen Argumenten als Elementen. Als Beispiel:
 
 \begin{lstlisting}{t03-prog7}
@@ -147,7 +146,7 @@ Allgemein gilt
 (cons exp-1 (cons ... (cons exp-n empty))...)
 \end{lstlisting}
 
-\subsection{Der ' oder quote Konstruktor}
+\section{Der ' oder quote Konstruktor}
 Da Listen wirklich sehr oft eingesetzt werden können einige Listen können mit Hilfe des Quote-Konstruktors ' noch weiter abgekürzt werden.
 \begin{lstlisting}{t03-prog10}
 '(1 2 3)
@@ -156,7 +155,6 @@ ist die Kurzform für
 \begin{lstlisting}{t03-prog10}
 (list 1 2 3)
 \end{lstlisting}
-\\
 Ein weiteres Beispiel:
 \begin{lstlisting}{t03-prog11}
 '((1 2) (3 4) (5 6))
@@ -177,7 +175,7 @@ steht für
 Achtung:\\
 \textit{'exp-i} ist ein Symbol, wie z.B. \textit{'+'}, \textit{'true}, \textit{'list (!!!)}. Nur für Zahlen gilt \textit{'e-i = e-i}. Beachten Sie, dass diese Regel rekursiv ist! Um list und quote zu verwenden, stellen Sie ab jetzt DrRacket um auf den Sprachlevel “Beginning Student with List Abbreviations” bzw. „Anfänger mit Listen-Abkürzungen“!
 
-\subsection{Verarbeitung rekursiver Datentypen}
+\section{Verarbeitung rekursiver Datentypen}
 Jetzt kann man sich die Frage stellen wie wir nun unsere Exemplaren rekursiven Datentypen? Die Antwort ist simpel: Wir benutzen unser Designrezept für heterogene Daten.\\
 
 1. Schritt: Definition des Vertrags, Header etc. \\
@@ -199,7 +197,7 @@ Für jeden Datentyp ein cond-Zweig u. Selektoren andeuten\\
     [(cons? a-list-of-symbols)
         ... (first a-list-of-symbols) ...
         ... (rest a-list-of-symbols) ...]))
-\end{lstlisting}\\
+\end{lstlisting}
 Der Erster Fall (leere Liste) ist trivial
 \begin{lstlisting}[firstnumber=6]
 [(empty? a-list-of-symbols) false]
@@ -233,5 +231,171 @@ Hier könnte man sich fragen: Wieso ist die Lösung wohldefiniert? (Wohldefinier
 Unsere rekursive Definition ist ein Beispiel für strukturelle
 Rekursion, da Sie Struktur der Prozedur der (rekursiven) Struktur der Daten folgt. Solche rekursiven Definitionen sind stets wohldefiniert, weil die Schachtelungstiefe der Daten in jedem rekursiven Aufruf strikt abnimmt.
 
-\subsection{Design von Prozeduren für rekursive Daten}
+\section{Design von Prozeduren für rekursive Daten}
 Wie ändert sich also nun unser Designrezept? In der \textbf{Datenanalyse und im Design} ändert ich das folgende: Wenn die Problembeschreibung Informationen beliebiger Größe beschreibt, benötigen wir eine rekursive Datenstruktur. Diese Datenstruktur benötigt mindestens zwei Fälle, von denen mindestens einer weder direkt noch indirekt auf die Definition zurückverweist – also eben \textit{nicht} rekursiv ist. Im \textbf{Template} müssen die rekursiven Zweige den rekursiven Aufruf andeuten. Im \textbf{Prozedurkörper} werden erst die \textit{Basisfälle} (nicht-rekursiv) implementieren, dann die rekursiven Zweige. Für die rekursiven Aufrufe davon ausgehen, dass die Prozedur bereits wie gewünscht funktioniert. Sonst ändert sich nichts weiteres.
+
+\section{Erzeugen von rekursiven Daten}
+Prozeduren, die rekursive Daten nach unserem Designrezept verarbeiten, kombinieren üblicherweise die Lösung aus den rekursiven Aufrufen mit den nicht-rekursiven Daten. Diese Kombination besteht häufig in der Konstruktion neuer Daten, deren Struktur analog zu denen der Eingabe ist.
+\begin{lstlisting}
+(define (sum a-list-of-nums)
+  (cond
+    [(empty? a-list-of-nums) 0]
+    [else (+
+  (first a-list-of-nums)
+  (sum (rest a-list-of-nums)))]))
+\end{lstlisting}
+
+Im folgenden Beispiel wird ein Programm zur Lohn für eine oder mehr Personen. Die Schreibweise mit dem "Pfeil" im Namen ist eine Konvention, wenn Werte "umgerechnet" werden. Sie hat \textit{eigene} Semantik.
+\begin{lstlisting}
+;; wage : number -> number
+;; to compute the total wage (at $12 per hour)
+;; of someone who worked for h hours
+(define (wage h)
+  (* 12 h))
+;; hours->wages : (listof number) -> (listof number)
+;; to create a list of weekly wages from
+;; a list of weekly hours (alon)
+(define (hours->wages alon)
+  (cond
+    [(empty? alon) empty]
+		[else (cons
+      (wage (first alon))
+      (hours->wages (rest alon)))]))
+\end{lstlisting}
+
+\section{Strukturen die Strukturen enthalten}
+Strukturen (und Listen) müssen nicht notwendigerweise atomare Daten enthalten. Sie können z.B. Exemplare ihrer eigenen Struktur als Elemente (wie bei der Listenstruktur), aber auch beliebige andere Strukturen/Listen enthalten. Sie können z.B. auch Exemplare ihrer eigenen Struktur als Elemente enthalten (wie bei der Listenstruktur). Zudem können sie beliebige andere Strukturen/Listen enthalten z.B. Liste von Punkten, Liste von Listen von Punkten. Hier ein kleines Beispiel:\\
+
+Ein Inventareintrag ist eine Struktur \textit{(make-ir s n)}, wobei s ein Symbol ist und n eine (positive) Zahl:
+\begin{lstlisting}
+(define-struct ir (name price))
+\end{lstlisting}
+Eine Inventarliste ist entweder \textit{empty} leer, oder \textit{(cons ir inv)}, wobei ir ein Inventareintrag ist und inv eine \textit{Inventarliste}.
+
+\subsection{Die Struktur natürlicher Zahlen}
+Natürliche Zahlen werden häufig als Aufzählungen eingeführt: 0,1,2 etc. Jedoch ist dieses "etc." nicht besonders hilfreich für die Programmierung. Mit Hilfe einer rekursiven Definition kann man das "etc." los werden:
+0 ist eine natürliche Zahl und falls n eine natürliche Zahl ist, dann auch der Nachfolger (succ n). Diese Definition generiert also
+\begin{lstlisting}
+(0, (succ 0), (succ (succ 0))
+\end{lstlisting}
+usw. Vergleichbar ist dies mit den Peano-Axiomen in der Mathematik. Diese Konstruktion ist analog zu der Konstruktion von Listen.
+
+\begin{itemize}
+	\item \textbf{cons} entspricht \textit{succ}
+	\item \textbf{rest} entspricht \textit{pred}
+	\item \textbf{empty?} entspricht \textit{zero?}
+\end{itemize}
+Funktionen auf natürlichen Zahlen können daher analog zu Funktionen auf Listen strukturiert werden. Hier die Definition der Prozeduren pred, succ und zero?:
+
+\begin{lstlisting}
+;; pred: N -> N
+;; returns the predecessor of n; if n is 0, return 0
+(define (pred n)
+  (if (> n 0)
+    (- n 1)
+      0))
+;; succ: N -> N
+;; returns the successor of n; if negative, return 0
+(define (succ n)
+  (if (>= n 0)
+    (+ n 1)
+      0))
+;; zero?: N -> boolean
+;; returns true if N is 0, else false
+;; Already defined in HtDP-TL, no need to do it again!
+\end{lstlisting}
+
+Beispiel 1:
+\begin{lstlisting}
+;; hellos : N -> (listof symbol)
+;; to create a list of n copies of 'hello
+(define (hellos n)
+  (cond
+    [(zero? n) empty]
+    [else (cons 'hello (hellos (pred n)))]))
+\end{lstlisting}
+
+Beispiel 2:
+\begin{lstlisting}
+;; ! : N -> N
+;; computes the faculty function
+(define (! n)
+  (cond
+    [(zero? n) 1]
+    [else (* n (! (pred n)))]))
+\end{lstlisting}
+
+\section{Intermezzo: Design von Hilfsprozeduren}
+\subsection{Wunschlisten)}
+Größere Programme bestehen aus vielen verschiedenen
+(Hilfs-)Prozeduren. Ein sinnvolles Vorgehen hierbei ist das Anlegen und Pflegen einer Wunschliste von Hilfsprozeduren. Eine Wunschliste ist eine Liste der Prozeduren, die noch entwickelt werden müssen, um ein Programm fertigzustellen. Die Prozeduren auf der Wunschliste können wir dann schrittweise mit Hilfe der Designrezepte implementieren. So eine Wunschliste ändert sich häufig im Laufe der Implementierung, etwa weil man entdeckt, dass bestimmte neue Hilfsprozeduren erforderlich sind um andere Prozeduren zum aufen zu bekommen. Die Reihenfolge der Abarbeitung der Wunschliste ist wichtig. Es gibt zwei Lösungsansetze die die Abarbeitung für den Entwickler vereinfachen. \\
+\subsubsection{"Bottom-Up"-Ansatz:}
+Hier werden erst die Prozeduren implementieren, die von keiner anderen Prozedur auf der Wunschliste abhängen.\\Der Vorteil: Wir können sofort und jederzeit testen\\
+Der Nachteil: Am Anfang ist oft noch nicht klar, welche Prozeduren auf
+der untersten Ebene benötigt werden; es kann der Gesamtüberblick
+verloren gehen
+\subsubsection{"Top-Down"-Ansatz:}
+Hier wird erst die Hauptprozedur implementieren, dann die dort aufgerufenen Funktionen usw.
+\\Vorteil: Inkrementelle Verfeinerung der Programmstruktur
+\\Nachteil: Man kann erst sehr spät testen; manchmal findet man erst “unten” einen konzeptuellen Fehler "oben". \\
+\\Oft ist aber eineMischung aus Top-Down und Bottom-Up sinnvoll. Hier nun ein Beispiel zum Sortieren einer Liste von Zahlen. Aka. "Insertion Sort"
+\begin{lstlisting}
+;; sort : (listof number) -> (listof number)
+;; to create a sorted list of numbers from all
+;; the numbers in alon
+;; Examples:
+;;(sort empty) à empty
+;; (sort (cons 1297.04 (cons 20000.00 (cons -505.25 empty))))
+;; -> (cons -505.25 (cons 1297.04 (cons 20000.00 empty)))
+(define (sort alon)
+  (cond
+    [(empty? alon) ...]
+    [else ... (first alon) ... (sort (rest alon)) ...]))
+\end{lstlisting}
+
+Der erste Fall (leere Liste) ist trivial. Der Aufruf \textit{(sort (rest alon))} im rekursiven Fall gibt uns eine sortierte Liste zurück. In diese Liste muss \textit{(first alon)} einsortiert werden. Die Prozedur, die dies erledigt, kommt auf unsere Wunschliste,
+die \textit{sort}-Prozedur können wir schon mal komplettieren.
+
+\begin{lstlisting}
+;; insert : number (listof number) -> (listof number)
+;; to create a list of numbers from n and the numbers
+;; in alon that is sorted in descending order; alon is
+;; already sorted
+(define (insert n alon) ...)
+(define (sort alon)
+  (cond
+    [(empty? alon) empty]
+    [else (insert (first alon) (sort (rest alon)))]))
+\end{lstlisting}
+Die \textit{insert}-Prozedur kann nun unabhängig von sort
+implementiert werden. Hierbei ist genaue Analyse der unterschiedlichen Fälle wichtig.
+\begin{lstlisting}
+;; insert : number (listof number) (sorted)
+;;              -> (listof number) (sorted)
+;; to create a list of numbers from n and the numbers in
+;; alon that is sorted in ascending order; alon is sorted
+(define (insert n alon)
+  (cond
+    [(empty? alon) (cons n empty)]
+    [else (cond
+    [(<= n (first alon))(cons n alon)]
+    [(> n (first alon))(cons
+        (first alon)(insert n (rest alon)))])]))
+\end{lstlisting}
+\subsection{Veralgemeinerung von Problemen}
+Häufig ist ein allgemeineres Problem als das, was man eigentlich lösen möchte einfacher zu verstehen als das eigentliche Problem. Die Abstraktion kann also durchaus die Lösung leichter machen. :)\\
+Doch wie gehen wir hier vor? Die Hilfsprozedur löst ein allgemeineres Problem, doch Hauptprozedur spezialisiert die Hilfsprozedur für das eigentliche Problem.
+Als Beispiel nehmen wir einen Münzwechsel. \\
+Auf wie viele Arten kann man einen Euro-Betrag a wechseln (unter Verwendung von Münzen à 1,2,5,10,20,50 Cent)? Verallgemeinern wir das Problem zunächst. Auf wie viele Arten kann man einen Euro-Betrag a wechseln, unter Verwendung der ersten n Münzarten aus 1,2,5,10,20,50 Cent? Spezialisierung: n=6\\
+%+++++++++++++++++++++++
+Wechselmöglichkeiten zählen: Einfache Formulierung des
+allgemeineren Problems als rekursive Prozedur:
+Die Anzahl der Möglichkeiten, den Betrag a unter Verwendung von n
+Sorten von Münzen zu wechseln, ist:
+§  1 falls a = 0 („eine Möglichkeit für Betrag 0€: keine einzige Münze“)
+§  0 falls a<0 oder n = 0 („negativer Betrag / keine Münzen erlaubt“)
+ansonsten:
+§  Die Anzahl von Möglichkeiten a zu wechseln unter Verwendung aller außer
+der letzten Münzsorte, plus
+§  Die Anzahl der Möglichkeiten a-d zu wechseln unter Verwendung aller n
+Münzsorten, wobei d der Nennwert der letzten Münzsorte ist.

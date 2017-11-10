@@ -29,7 +29,6 @@
     % C++ Code Gedöns
     \usepackage{listings}
     \lstset{numbers=left, numberstyle=\tiny, numbersep=5pt}
-    \lstset{language=scheme}
 
     % Fortlaufende nummerierung
     \usepackage{chngcntr}
@@ -39,51 +38,30 @@
 		\usepackage{fancybox}
     % Style
     \pagestyle{fancy}
-
-    \lhead{ }
-    \chead{ }
-    \rhead{ }
-
-    % Fußzeile
-    \lfoot{ \leftmark}
-    \cfoot{\slshape }
-    \rfoot{\thepage}
-
-    % Trennlinien
-    %\renewcommand{\headrulewidth}{0.0pt}	% keine trennlinie nach der Kopfzeile
-    \renewcommand{\footrulewidth}{0.2pt}		% Dünne Trennline vor der Fußzeile
-
-    % ============ Paketeinstellungen & Sonstiges ============
-    % Besondere Trennungen
-    \hyphenation{De-zi-mal-tren-nung}
+		\renewcommand{\footrulewidth}{0.2pt}		% Dünne Trennline vor der Fußzeile
+		\hyphenation{De-zi-mal-tren-nung}
     \hyphenation{Ent-wick-lung}
     \hyphenation{ent-wick-eln}
     \hyphenation{Library}
-
-    %Helvetia FONT
-    \usepackage{mathptmx}
+		\usepackage{mathptmx}
     \usepackage{helvet}
 
-    % ============ Dokumentbeginn ============
+		\newcommand{\scl}{\begin{lstlisting}}
 
-    %\setmainfont{Calibri}
+		\newcommand{\ecl}{\end{lstlisting}}
     \begin{document}
-    % Seiten ohne Kopf- und Fußzeilen sowie Seitenzahl
     \pagestyle{fancy}
-    %\include{titel}
 
     \title{
-      Funktionale und Objektorientierte Programmierung\\
-      \large ---- \\Dieses Skript richtet sich nach der Vorlesung von \\ Prof. Dr. rer. nat. Karsten Weihe \\ Formulierungen sind teils von den Folien übernommen.}
-
+      Funktionale und Objektorientierte Programmierung
+      \large ---- \\ Dieses Skript richtet sich nach der Vorlesung von \\ Prof. Dr. rer. nat. Karsten Weihe \\ Formulierungen sind teils von den Folien übernommen.}
+		\author{}
     \date{\today}
     \affil{Technische Universität Darmstadt}
     \maketitle
-    %\cleardoublepage{}
-    % Seiten ab jetzt mit Kopf- und Fußzeilen sowie Seitenzahl
     \pagestyle{fancy}
     % Kopfzeile
-    \lhead{ }
+    \lhead{}
     \chead{\leftmark}
     \rhead{}
 
@@ -96,6 +74,7 @@
     % Inhaltsverzeichnis
     \begingroup
       \renewcommand*{\chapterpagestyle}{empty}
+
       \pagestyle{empty}
       \tableofcontents
       %\clearpage
