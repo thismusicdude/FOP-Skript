@@ -22,71 +22,48 @@ Informatik das Programmieren definieren.
 
 \subsection{... einer Programmiersprache}
 
-Eine Programmiersprache ist mehr als ein Hilfsmittel um einen
-Computer anzuweisen, Aufgaben durchzuführen.
-Sie dient auch als \textbf{Rahmen}, innerhalb dessen wir \textbf{unsere
-Ideen} über die \textbf{Problemdomäne organisieren.}
+Eine Programmiersprache ist mehr als ein Hilfsmittel um einen Computer anzuweisen, Aufgaben durchzuführen.
+Sie dient auch als \textbf{Rahmen}, innerhalb dessen wir \textbf{unsere Ideen} über die \textbf{Problemdomäne organisieren.}
 
-Wenn wir eine Sprache beschreiben, sollten wir
-die Hilfsmittel beachten, die sie uns zum
-Kombinieren von einfachen Ideen anbietet, um
-komplexere Ideen zu bilden.
+Wenn wir eine Sprache beschreiben, sollten wir die Hilfsmittel beachten, die sie uns zum Kombinieren von einfachen Ideen anbietet, um komplexere Ideen zu bilden.
 
-Jede vollwertige Programmiersprache hat drei Mechanismen,
-um Prozessideen zu strukturieren:
+Jede vollwertige Programmiersprache hat drei Mechanismen, um Prozessideen zu strukturieren:
 
-\begin{itemize}
-	\item \textbf{\textit{Primitive} Ausrücke}
-		\subitem - Repräsentieren die einfachsten Einheiten der Sprache
-		\subitem - Im Deutschen: jedes Wort ist ein primitiver Ausdruck
-	\item \textbf{\textit{Kombinationsmittel}}
-		\subitem - Zusammengesetzte Elemente werden aus einfacheren Einheiten
-		konstruiert
-		\subitem - Im Deutschen: Zusammensetzung mehrerer Wörter zu einem Satz.
-	\item \textbf{\textit{Abstraktionsmittel}}
-		\subitem - Zusammengesetzte Elemente können benannt und weiter als Einheiten manipuliert werden
-		\subitem - Im Deutschen: Definition eines Begriffs („Ein Auto ist ...“), so dass der Begriff danach als „Kurzform“ für die Erklärung nutzbar ist
-\end{itemize}
+\subsection{... in der Informatik}
+
+Zum einen \textbf{\textit{Primitive} Ausrücke}, welche die einfachsten Einheiten der Sprache repräsentieren. In der deutschen Sprache wäre zB. jedes Wort ein primitiver Ausdruck.
+
+Ein weiterer sind die \textbf{\textit{Kombinationsmittel}}. Hier werden zusammengesetzte Elemente aus einfacheren Einheiten konstruiert. In der deutschen Sprache wäre dies eine zusammensetzung mehrerer Wörter zu einem Satz.
+
+In der deutschen Sprache wären für \textbf{\textit{Abstraktionsmittel}} zB. die Definition eines Begriffs („Ein Auto ist ...“), so dass der Begriff danach als „Kurzform“ für die Erklärung nutzbar ist. Das gleiche geht natürlich auch in einer Programmiersprache. Hier können Zusammengesetzte Elemente benannt und weiter als Einheiten manipuliert werden
 
 \subsection{... in der Elektronik}
-\begin{itemize}
-	\item \textbf{\textit{Primitive} Ausrücke}
-		\subitem - Widerstände, Kondensatoren, Induktivitäten, Spannungsquellen, ...
 
-	\item \textbf{\textit{Kombinationsmittel}}
-		\subitem - Richtlinien für das Verdrahten der Schaltkreise
-		\subitem - Standardschnittstellen (z.B. Spannungen, Strömungen) zwischen den
-		Elementen. Diese Schnittstellen können auch Anforderungen an
-		konkrete zulässige Werte oder Einheiten stellen („5 mA“)
+In der Elektronik sind \textbf{\textit{Primitive} Ausrücke} zB. Widerstände, Kondensatoren, Induktivitäten, Spannungsquellen, usw...
+\textbf{\textit{Kombinationsmittel}} wären in der Elektronik Richtlinien für das Verdrahten der Schaltkreise oder auch Standardschnittstellen (z.B. Spannungen, Strömungen) zwischen den Elementen. Diese Schnittstellen können auch Anforderungen an konkrete zulässige Werte oder Einheiten stellen („5 mA“)
 
-	\item \textbf{\textit{Abstraktionsmittel}}
-		\subitem - 	“Black box” Abstraktion – denke über einen Unter-Schaltkreis als eine
-		Einheit: z.B. Verstärker, Regler, Empfänger, Sender, ...
-\end{itemize}
-
+Ein {\textit{Abstraktionsmittel}} wäre hier die “Black box” Abstraktion. Man betrachtet hier über einen Unter-Schaltkreis als eine Einheit: z.B. Verstärker, Regler, Empfänger, Sender, usw...
 
 \section{Sprachelemente}
 
 \subsection{Die Primitiven}
 \subsubsection{Zahlen}
-Zahlen sind selbstauswertend: Die Werte der Zifferfolge ist die Zahl,
-die, die sie bezeichnen.
+Zahlen sind selbstauswertend: Die Werte der Zifferfolge ist die Zahl, die sie bezeichnen.
 $$ 23 \Rightarrow 23 $$
 $$ -36 \Rightarrow -36 $$
 
 \subsubsection{Boolesche Werte}
 Boolsche Werte können nur \textit{wahr} oder \textit{falsch} sein. Diese sind ebenfalls
-selbstauswertend. Sie werden als 
-$$ True \text{ oder } False $$ 
-bezeichnet. Prozeduren sind in der Programmierung auch als „Funktionen“ oder „Methoden“ bekannt. Beispiele für eingebaute Prozeduren sind
+selbstauswertend. Sie werden als
+$$ True \text{ oder } False $$
+bezeichnet.
+\subsubsection{Prozeduren}
+Prozeduren sind in der Programmierung auch als „Funktionen“ oder „Methoden“ bekannt. Beispiele für eingebaute Prozeduren sind
 $$ +, \; *, \; /, \; -, \; =, \; usw.$$
-Aber was ist der Wert von so einem Ausdruck? Der Wert von + ist eine Prozedur, die Zahlen addiert. Dies werden wir später als „Higher-Order Procedures“ kennen lernen.
-% Was auch immer das folgende beeutet. steht aber so in den Folien :)
-Auswertung: Nachschlagen des dem Namen zugewiesenen Wertes.
+Aber was ist der Wert von so einem Ausdruck? Der Wert von + ist eine Prozedur, die Zahlen addiert. Dies werden wir später als „Higher-Order Procedures“ kennen lernen. Eine Auswertung bedeutet soviel wie das \textit{Nachschlagen} des dem Namen zugewiesenen Wertes.
 
 \subsection{Besonderheiten bei Zahlen}
-DrRacket rechnet immer genau, wenn das möglich ist. Ganze und endliche Zahlen berechnet er so wie es „üblich ist“. Brüche mit periodischem Ergebnis werden ebenfalls in einem Text als Bruch - etwa \fbox{\textit{7/3}} dargestellt. Im Programm werden sie jedoch als Periode angezeigt. Beispielsweise \fbox{- 2.\uline{3}}.
-Doch kann nicht jede Zahl \textit{exakt} dargestellt werden. Man wird hier durch die Verwendung des Binärsystems eingeschränkt. Es gilt:
+DrRacket rechnet immer genau, wenn dies möglich ist. Ganze und endliche Zahlen berechnet er so wie es „üblich ist“. Brüche mit periodischem Ergebnis werden ebenfalls in einem Text als Bruch - etwa \fbox{\textit{7/3}} dargestellt. Im Programm werden sie jedoch als Periode angezeigt. Beispielsweise \fbox{- 2.\uline{3}}. Doch kann nicht jede Zahl \textit{exakt} dargestellt werden. Man wird hier durch die Verwendung des Binärsystems eingeschränkt. Es gilt:
 \begin{quote}
 	„je mehr Nachkommastellen die Zahl besitzt, desto ungenauer wird in der Regel ihre Darstellung im Binärsystem“
 \end{quote}
@@ -104,13 +81,8 @@ $$(\sqrt{2})^2 = \fbox{\#i2.0000000000000004}$$
 \subsection{Kombination}
 Der Wert einer Kombination wird bestimmt durch die Ausführung der (durch den Operator) angegebenen Prozedur mit den Werten der Operanden. In Racket ist eine Sequenz von Ausdrücken eingeschlossen in Klammern. Die Ausdrücke sind primitiv oder erneut zusammengesetzt.
 
-
-
 Hier ein Beispiel:
-Numerische Ausdrücke können mit Ausdrücken kombiniert werden,
-die primitive Prozeduren repräsentieren (z.B. + oder *), um einen
-zusammengesetzten Ausdruck zu erstellen.
-Kombinationen können verschachtelt werden. Dafür müssen sie die Regeln einfach Rekursiv anwenden.
+Numerische Ausdrücke können mit Ausdrücken kombiniert werden, die primitive Prozeduren repräsentieren (z.B. + oder *), um einen zusammengesetzten Ausdruck zu erstellen. Kombinationen können verschachtelt werden. Dafür müssen sie die Regeln einfach Rekursiv anwenden.
 \begin{figure}
 	\begin{center}
 		\includegraphics[height=2cm]{Bilder/T01_Sprachelemente_Kombination}
@@ -129,3 +101,62 @@ WICHTIG:
  Eine Kombination bedeutet immer eine Anwendung einer Prozedur. Klammern können nicht eingefügt oder weggelassen werden, ohne die Bedeutung des Ausdrucks zu ändern.
 
 \subsection{Abstraktion}
+
+In der Abstraktion wird zunächst erst etwas komplexes aus primitiven \textit{Bausteinen} gebaut. Dies wiederum wird nun benannt und kann daraufhin wieder als primitiver \textit{Baustein} behandelt werden. In Racket ist das einfachste Abstraktionsmittel das \fbox{define}. Im folgenden zwei Beispiele
+
+\begin{lstlisting}{t01-prog2}
+(define score (+ 27 3))
+(define pi 3.14)
+\end{lstlisting}
+
+\textbf{Sonderformen} davon sind geklammerte Ausdrücke, die mit einem wenigen HtDP-TL-Schlüsselwörter starten. Ein Beispiel hierfür wäre \fbox{define}.  Mit define kann man einen Wert an einen Namen binden wie im zuvor genannten Beispiel sichtbar. Die \fbox{define} Sonderform wertet den zweiten Ausdruck nicht aus (in diesem Beispiel: \fbox{score}). Sie assoziiert diesen Namen mit dem Wert des dritten Ausdruckes in einer Umgebung. \fbox{define} liefert keinen Wert als Ergebnis der Auswertung. Wir sehen: \fbox{define} liefert keinen Wert als Ergebnis der Auswertung.
+
+\subsection{Namensgebung und Umgebung}
+Ein wichtiger Aspekt einer Programmiersprache ist die Möglichkeit, Objekte über Namen zu referenzieren.  Ein Name identifiziert eine Variable, deren Wert ein Objekt ist. Das Objekt kann dabei ein primitiver Ausdruck sein (z.B. Zahlen) oder  beliebig komplex, z.B. eine Struktur ($\Rightarrow$ T02) oder Liste ($\Rightarrow$ T03).\\
+
+Der Interpreter unterhält eine Art Speicher, um Name-Objekt Paare zu verwalten. Darin werden die Werte mit den hinterlegten Symbolen bzw. Namen assoziiert. So können später dann die Werte über die Symbole dann zugewiesen werden. Man kann sich die \textit{Umgebung} wie ein Telefon- oder Wörterbuch vorstellen. Hinter jedem Namen steht also das damit verknüpfte Objekt (statt einer Telefonnummer bzw. Definition).
+
+Um den Wert auszurechnen, der durch den Namen repräsentiert wird, reicht es aus, ihn in der Umgebung aufzulösen. Als Beispiel: Die Evaluierung von score ist 30
+
+Hierbei ist zu beachten: Wir haben das alles für die Symbole der arithmetischen Operatoren +, *, usw. schon vorausgesetzt. Man muss sich also nicht damit beschäftigen \textit{wie} sie funktionieren. Es reicht nur zu wissen \textit{was} sie machen.
+
+\subsection{Auswertungsregel}
+Ein Ausdruck der \textit{Selbst-auswertend (self-rule)} ist, ist zB. eine Zahl. Der Wert des primitiven Ausdrucks 42 ist die Zahl 42.
+
+Ein \textit{Eingebauter Operator} gibt die Sequenz der Maschineninstruktionen zurück, die die entsprechenden Operationen durchführen.
+
+Ein \textit{Name (name-rule)} gibt den Wert zurück, der in der Umgebung mit diesem Namen assoziiert wurde.
+
+Eine \textit{Sonderform} macht etwas "Besonderes".
+
+Eine \textit{Kombination} wertet die Unterausdrücke zunächst (in beliebiger Reihenfolge) aus. Daraufhin wird die Prozedur, die der Wert des am weitesten links liegenden Unterausdruckes ist (der Operator), auf die Argumente (die Werte der restlichen Unterausdrücke (Operanden)) angewendet.
+Beispiel einer Kombination: \fbox{(+ 4 (* 2 3))}
+
+Die \textit{Auswertungsregel} ist rekursiv. Das heißt bei einer Kombination ruft die Regel sich selbst auf. Auch muss jedes Element ausgewertet werden, bevor die Gesamtauswertung einer Kombination abgeschlossen werden kann.
+
+Die Auswertung der folgenden Kombination erfordert die Anwendung der Auswertungsregel auf vier unterschiedliche Kombinationen.
+
+ \fbox{(* \fbox{(+ 2 \fbox{(* 4 6)} )} \fbox{(+ 3 5 7)})}
+
+In der \fbox{define}-Regel wird nur der zweite Operand ausgewertet. Der Name ist hier nur an den berechneten Wert gebunden. Somit ist der Gesamtwert des Ausdrucks undefiniert.
+\begin{lstlisting}{t01-prog3}
+(define pi 3.14)
+\end{lstlisting}
+\fbox{\fbox{Name $\Rightarrow$ pi} \fbox{Wert $\Rightarrow$ 4.14}} \\
+
+Bei einer Zahl ist das ganze ein wenig einfacher. Wenn wir nun \textit{23} in den Interpreter eintippen gilt zunächst die \textit{self-rule} und der Ausdruck \textit{23} ist somit selbstauswertend. In der Ausgabe wird also auch \textit{23} ausgegeben.
+
+\fbox{\fbox{Ausdruck $\Rightarrow$ 23} \fbox{Wert $\Rightarrow$ 23} \fbox{Ausgabe $\Rightarrow$ 23}}\\
+
+Geben wir nun aber \textit{pi} ein gilt die \textit{name-rule}.
+
+\fbox{\fbox{Ausdruck $\Rightarrow$ pi} \fbox{Wert $\Rightarrow$ 3.14} \fbox{Ausgabe $\Rightarrow$ 3.14}}
+
+\subsection{Definition neuer Prozeduren}
+Im folgenden sehen wir drei verschiedene Beispiele einer Kresiflächenberechnung und wir stellen Fest, dass alle Berechnungen ein gleiches Muster haben. Wir sollten uns jetzt fragen, wie wir es schaffen dieses Muster zu generalisieren.
+\begin{lstlisting}{t01-prog4}
+(* 3.14 (* 5 5))
+(* 3.14 (* 23.2 23.2))
+(* 3.14 (* r r))
+\end{lstlisting}
+Um wiederkehrende Muster festzuhalten benutzen wir \textit{Prozeduren}. Diese sind analog zu einer Funktionsdefinition in der Mathematik. Deshalb geben wir ihnen auch manchmal den gleichen Namen \textit{Funktion}.

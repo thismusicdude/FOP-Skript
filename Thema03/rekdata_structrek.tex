@@ -113,6 +113,7 @@ In den folgenden Beispielen sehen wir: Listen speichern beliebige Datentypen, au
   (cons 3
     (cons true empty)))
 \end{lstlisting}
+%%% ###########################################
 \section{Abgeschlossenheitseigenschaft}
 Eine Operation zum Kombinieren von Daten besitzt die Abgeschlossenheitseigenschaft, wenn die Ergebnisse der Kombination von Datenobjekten wiederum mit der Operation kombiniert werden können.  \textit{cons} ist hier ein gutes Beispiel. Solche Kombinationsoperatoren können verwendet werden, um hierarchische Daten aufzubauen. \\\
 Doch sind wir der Abgeschlossenheit schon einmal begegnet?\\
@@ -264,7 +265,7 @@ Im folgenden Beispiel wird ein Programm zur Lohn für eine oder mehr Personen. D
 \end{lstlisting}
 
 \section{Strukturen die Strukturen enthalten}
-Strukturen (und Listen) müssen nicht notwendigerweise atomare Daten enthalten. Sie können z.B. Exemplare ihrer eigenen Struktur als Elemente (wie bei der Listenstruktur), aber auch beliebige andere Strukturen/Listen enthalten. Sie können z.B. auch Exemplare ihrer eigenen Struktur als Elemente enthalten (wie bei der Listenstruktur). Zudem können sie beliebige andere Strukturen/Listen enthalten z.B. Liste von Punkten, Liste von Listen von Punkten. Hier ein kleines Beispiel:\\
+Strukturen (und Listen) müssen nicht notwendigerweise atomare Daten enthalten. Sie können z.B. Exemplare ihrer eigenen Struktur als Elemente (wie bei der Listenstruktur), aber auch beliebige andere Strukturen/Listen enthalten. Sie können z.B. auch Exemplare ihrer eigenen Struktur als Elemente enthalten (wie bei der Listenstruktur). Zudem können sie beliebige andere Strukturen/Listen enthalten z.B. Liste von Punkten, Liste von Listen von Punkten. Hier ein kleines Beispiel:
 
 Ein Inventareintrag ist eine Struktur \textit{(make-ir s n)}, wobei s ein Symbol ist und n eine (positive) Zahl:
 \begin{lstlisting}
@@ -344,7 +345,7 @@ Hier wird erst die Hauptprozedur implementieren, dann die dort aufgerufenen Funk
 ;; to create a sorted list of numbers from all
 ;; the numbers in alon
 ;; Examples:
-;;(sort empty) à empty
+;;(sort empty) -> empty
 ;; (sort (cons 1297.04 (cons 20000.00 (cons -505.25 empty))))
 ;; -> (cons -505.25 (cons 1297.04 (cons 20000.00 empty)))
 (define (sort alon)
@@ -382,20 +383,14 @@ implementiert werden. Hierbei ist genaue Analyse der unterschiedlichen Fälle wi
     [(> n (first alon))(cons
         (first alon)(insert n (rest alon)))])]))
 \end{lstlisting}
-\subsection{Veralgemeinerung von Problemen}
-Häufig ist ein allgemeineres Problem als das, was man eigentlich lösen möchte einfacher zu verstehen als das eigentliche Problem. Die Abstraktion kann also durchaus die Lösung leichter machen. :)\\
+\subsection{Verallgemeinerung von Problemen}
+Häufig ist ein allgemeineres Problem als das, was man eigentlich lösen möchte einfacher zu verstehen als das eigentliche Problem. Die Abstraktion kann also durchaus die Lösung leichter machen. \\\\
 Doch wie gehen wir hier vor? Die Hilfsprozedur löst ein allgemeineres Problem, doch Hauptprozedur spezialisiert die Hilfsprozedur für das eigentliche Problem.
-Als Beispiel nehmen wir einen Münzwechsel. \\
-Auf wie viele Arten kann man einen Euro-Betrag a wechseln (unter Verwendung von Münzen à 1,2,5,10,20,50 Cent)? Verallgemeinern wir das Problem zunächst. Auf wie viele Arten kann man einen Euro-Betrag a wechseln, unter Verwendung der ersten n Münzarten aus 1,2,5,10,20,50 Cent? Spezialisierung: n=6\\
-%+++++++++++++++++++++++
-Wechselmöglichkeiten zählen: Einfache Formulierung des
-allgemeineren Problems als rekursive Prozedur:
-Die Anzahl der Möglichkeiten, den Betrag a unter Verwendung von n
-Sorten von Münzen zu wechseln, ist:
-§  1 falls a = 0 („eine Möglichkeit für Betrag 0€: keine einzige Münze“)
-§  0 falls a<0 oder n = 0 („negativer Betrag / keine Münzen erlaubt“)
-ansonsten:
-§  Die Anzahl von Möglichkeiten a zu wechseln unter Verwendung aller außer
-der letzten Münzsorte, plus
-§  Die Anzahl der Möglichkeiten a-d zu wechseln unter Verwendung aller n
-Münzsorten, wobei d der Nennwert der letzten Münzsorte ist.
+Als Beispiel nehmen wir einen Münzwechsel. \\\\
+Auf wie viele Arten kann man einen Euro-Betrag a wechseln (unter Verwendung von Münzen à 1,2,5,10,20,50 Cent)? Verallgemeinern wir das Problem zunächst. Auf wie viele Arten kann man einen Euro-Betrag a wechseln, unter Verwendung der ersten n Münzarten aus 1,2,5,10,20,50 Cent? Spezialisieren wir: n=6\\\\
+Wichtig ist es, dass die Formulierung es allgemeinen Problems als rekursive Prozedur einfach erklärt wird.\\\\
+Die Anzahl der Möglichkeiten den Betrag a unter Verwendung von n Sorten von Münzen zu wechseln, ist:
+
+\begin{itemize}
+	\item $1 \text{f alls } a = 0$
+\end{itemize}
