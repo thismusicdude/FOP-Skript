@@ -159,4 +159,245 @@ Im folgenden sehen wir drei verschiedene Beispiele einer Kresiflächenberechnung
 (* 3.14 (* 23.2 23.2))
 (* 3.14 (* r r))
 \end{lstlisting}
-Um wiederkehrende Muster festzuhalten benutzen wir \textit{Prozeduren}. Diese sind analog zu einer Funktionsdefinition in der Mathematik. Deshalb geben wir ihnen auch manchmal den gleichen Namen \textit{Funktion}.
+Um wiederkehrende Muster festzuhalten benutzen wir \textit{Prozeduren}. Diese sind analog zu einer Funktionsdefinition in der Mathematik. Deshalb geben wir ihnen auch manchmal den gleichen Namen \textit{Funktion}. Um neue Prozeduren zu definieren verwenden wir die \fbox{define}-Sonderform. (siehe Abbildung \ref{fig:t01_pd})
+
+\begin{figure}
+  \includegraphics[height=4cm]{Bilder/T01_def_newproc.png}
+  \caption{Prozedur Definition}
+  \label{fig:t01_pd}
+\end{figure}
+
+Sobald eine Prozedur definiert wurde, kann sie wie eine
+primitive Prozedur (wie +, * etc.) benutzt werden.
+\begin{lstlisting}{t01-prog5}
+(area-of-disk 5)
+	;; -> ergibt 78.5
+(- (area-of-disk 5) (area-of-disk 3))
+	;; -> ergibt (78.5 - 28.26) = 50.24
+\end{lstlisting}
+Bereits definierte Prozeduren können auch zu neuen Prozeduren
+kombiniert werden.
+\begin{lstlisting}{t01-prog5}
+(define (area-of-ring outer inner)
+	(- (area-of-disk outer) (area-of-disk inner)))
+\end{lstlisting}
+Die Anwendung sähe wie folgt aus:
+\begin{lstlisting}{t01-prog5}
+(area-of-ring 5 3)
+	;; = (- (area-of-disk 5) (area-of-disk 3))
+	;; = (- (* 3.14 (* 5 5)) (* 3.14 (* 3 3)))
+	;; = ... = 50.24
+\end{lstlisting}
+
+\subsection{Informelle Beschreibungen}
+Eine informelle Beschreibungen sind üblicherweise nicht in Form mathematischer Ausdrücke geschrieben. Sie sind informelle Problembeschreibungen, welche in Programmeumzuwandeln sind. Meist enthalten sie auch irrelevante oder mehrdeutige Informationen.
+
+\subsubsection{Beispiel}
+\textit{Die Firma XYZ bezahlt ihren Angestellten 12 € pro Stunde. Ein Angestellter arbeitet zwischen 20 und 65 Stunden pro Woche. Entwickeln Sie ein Programm, welches den Lohn eines Angestellten aus der Anzahl der Arbeitsstunden berechnet.}
+\begin{lstlisting}{t01-prog6}
+(define (lohn stundenanzahl)
+	(* 12 stundenanzahl))
+\end{lstlisting}
+
+\subsection{Fehler}
+Ihre Programme werden meist Fehler enthalten. Jedoch ist dies nichts Schlimmes. Lassen Sie sich durch Fehler nicht verwirren oder entmutigen. Sowas gehört dazu. :)
+Mögliche Fehler wären zB. diese:
+\begin{lstlisting}{t01-prog6}
+;; Falsche klammerung
+(* 3 (5)
+;; Operator eines Prozeduraufrufs ist keine Prozedur
+(10)
+(10 + 20)
+;; Typfehler und andere Laufzeitfehler
+(+ 3 true)
+(/ 3 0)
+\end{lstlisting}
+Probieren Sie einmal aus, was bei fehlerhaften Eingaben passiert und versuchen Sie die Fehlermeldungen zu verstehen!
+
+\subsection{Design von Programmen}
+Das Design von Programmen ist nicht trivial. Das folgende Rezept soll Ihnen helfen, Ihre ersten Programme zu schreiben. Es wird im folgenden eine "Schritt für Schritt Beschreibung" gegeben, was zu tun ist und wie sie vorgehen können. Später wird dieses Rezept noch ein wenig verfeinert.
+
+\subsubsection{Jede Programmentwicklung besteht aus
+mindestens den folgenden vier Aktivitäten:}
+
+\begin{itemize}
+	\item Verstehen, was der Zweck des Programms ist
+	\item Nutzungsbeispiele ausdenken
+	\item Den Programmkörper implementieren
+	\item Testen
+\end{itemize}
+
+\begin{quote}
+	„If you can't write it down in English, you can't code it.	“ \\
+	\textit{~ Peter Halpern}
+\end{quote}
+
+\subsubsection{Verstehen, was der Zweck des Programms ist:}
+Vergeben sie zunächst einen sinnvollen \textit{Namen} und definieren sie darauf hin einen \textit{Vertrag}. In diesen Vertrag wird beschrieben welche Arten von Daten verarbeitet („konsumiert“) und welche werden als Ergebnis geliefert („produziert“) werden.
+\begin{lstlisting}{t01-prog7}
+;; area-of-ring :: number number -> number
+;; Berechnet die Flaeche eines Rings
+;; mit Radius "outer", dessen
+;; Loch den Radius "inner" hat
+\end{lstlisting}
+
+\subsubsection{Nutzungsbeispiele ausdenken}
+Nutzungsbeispiele helfen die Ein-/Ausgaberelation zu charakterisieren. Es ist oft einfacher, Abstraktes anhand von Beispielen zu verstehen und logische Fehler zu entdecken.
+
+\begin{lstlisting}{t01-prog7}
+;; Beispiel: (area-of-ring 5 2) ergibt 65.94
+\end{lstlisting}
+
+\subsubsection{Implementierung}
+Ist die Eingabe-Ausgabe Relation eine mathematische Formel, können wir diese meist direkt übersetzen.  Bei einer informellen Beschreibung müssen wir uns den Berechnungsprozess klarmachen. Hierbei können die Beispiele aus Schritt 2 helfen.
+
+\begin{lstlisting}{t01-prog7}
+(define (area-of-ring outer inner)
+	(- (area-of-disk outer) (area-of-disk inner)))
+\end{lstlisting}
+
+\subsubsection{Testen!}
+\begin{quote}
+	“Testing can show the presence of bugs, but not their absence.”\\
+	\textit{~ Edsger W. Dijkstra}
+\end{quote}
+\begin{quote}
+	“Beware of bugs in the above code; I have only proved it correct, not tried it“\\
+	\textit{~ Donald E. Knuth}
+\end{quote}
+
+Nutzen Sie die folgenden eingebauten Prozeduren der HtDP-TL um ihren Programmcode auf Bugs zu untersuchen.
+\begin{lstlisting}{t01-tests}
+;; Vergleicht den “test"-Wert exakt mit
+;; dem "expected"-Wert
+(check-expect test expected)
+
+;; Prüfung, ob der Testwert (meist Gleitkommazahl)
+;; korrekt ist mit Abweichung ± delta, etwa delta = 0.0001.
+(check-within test expected delta)
+
+;; Prüft, ob der Aufruf die erwartete Fehlermeldung liefert
+(check-error test message)
+\end{lstlisting}
+
+% TODO Hilfsprozeduren
+% TODO Blackbox
+\subsection{Bedingte Ausdrücke}
+In der HtDP-TL gibt es zwei Formen von bedingten Ausdrücken.
+\begin{lstlisting}{t01-if}
+;; Form 1)
+(if <test>
+	<then-expr>
+	<else-expr>) ;; in HtDP-TL nicht optional!
+
+;; Form 2)
+(cond
+	[<test1> <expr1>]
+	[<test2> <expr2>]
+	. . .
+	[else <last-expr>]) ;; optional
+\end{lstlisting}
+
+\subsection{Boolsche Funktionen}
+\begin{lstlisting}{t01-bool}
+(and <expr_1> <expr_2> . . . <expr_N>)
+;; Beispiele:
+(and (= 4 4) (< 5 3))
+(and true (+ 3 5))
+	;;-> false
+ 	;; Fehler: and: question result is not true or false: 8
+(and false (+ 3 5))
+	;; -> Shortcut-Regel: false
+\end{lstlisting}
+\fbox{<expr\_i> (i = 1..N)} werden in dieser Reihenfolge ausgewertet. Es wird \textit{false} zurück gegeben, falls irgendein Ausdruck als \textit{false} ausgewertet wird, sonst wird \textit{true} zurückgegeben. Wenn einer der ausgewerteten Ausdrücke weder tru\textit{true} noch \textit{false} ergibt, gibt es einen Fehler. Durch Shortcut-Regel werden manche Ausdrücke nicht ausgewertet.
+
+\begin{lstlisting}{t01-bool}
+(or <expr1_> <expr_2> . . . <expr_N>)
+\end{lstlisting}
+
+\begin{lstlisting}{t01-bool}
+(boolean=? <expr1> <expr2>)
+\end{lstlisting}
+
+\begin{lstlisting}{t01-bool}
+(not <expr>)
+\end{lstlisting}
+
+\subsection{Design konditionaler Prozeduren}
+Jede Programmentwicklung besteht aus wenigstens vier Aktivitäten.
+\begin{itemize}
+	\item 1. Verstehen, was der Zweck des Programms ist
+	\item 2.  Nutzungsbeispiele ausdenken
+	\item 3.  Den Programmkörper implementieren
+	\item 4.  Testen
+\end{itemize}
+
+Neue Phase: Datenanalyse
+§  Welche unterschiedlichen Situationen gibt es?
+§  Beispiele
+§  Mindestens ein Beispiel für jede Situation
+§  Implementierung des Programmkörpers
+§  Erst Skelett der cond/if Ausdrücke definieren, dann die einzelnen
+Fälle implementieren
+§  Testen
+§  Tests sollten alle Situationen abdecken
+
+\subsubsection{Bitte Beachten!}
+Überflüssigen Code vermeiden! Dieser Code...:
+\begin{lstlisting}
+(if (< x 0)
+	true
+	false)
+\end{lstlisting}
+... ist identisch zu:
+\begin{lstlisting}
+(< x 0)
+\end{lstlisting}
+Entsprechend bei „umgekehrter Logik“..
+\begin{lstlisting}
+(if (>= x 0)
+	false
+	true)
+\end{lstlisting}
+kürzer, klarer, besser
+\begin{lstlisting}
+(< x 0)
+;; Alternative
+(not (>= x 0))
+\end{lstlisting}
+
+% TODO
+\subsection{Symbole}
+Bis jetzt hatten wir Zahlen und Booleans als primitive Werte
+kennengelernt
+§  Oft wollen wir symbolische Informationen speichern
+§  Namen, Wörter, Richtungen,...
+§  Ein Symbol ist in HtDP-TL eine Sequenz von Zeichen, angeführt
+von einem einfachen Anführungszeichen:
+§  'the 'dog 'ate 'a 'cat! 'two^3 'and\%so\%on?
+§  Nicht alle Zeichen sind erlaubt (z.B. keine Leerzeichen)
+§  Nur eine Operation auf diesem Datentyp: \fbox{symbol=?
+
+\begin{lstlisting}
+(symbol=? 'Hallo 'Hallo) -> true
+(symbol=? 'Hallo 'ABC) -> false
+(symbol=? 1 2) -> Fehler
+\end{lstlisting}
+
+Symbole sind atomar (wie auch Zahlen, Booleans) dh. Symbole können nicht zerlegt werden.
+
+\begin{lstlisting}
+;; reply: symbol -> symbol
+;; give a decent reply to a greeting or questions
+;; example: (reply 'GoodMorning) is 'Hi
+(define (reply s)
+	(cond
+		[(symbol=? s 'GoodMorning) 'Hi]
+		[(symbol=? s 'HowAreYou?) 'Fine]
+		[(symbol=? s 'GoodAfternoon) 'INeedANap]
+		[(symbol=? s 'GoodEvening) 'BoyAmITired]
+		[else (error 'reply "unknown case")] ))
+;; Tests
+(check-expect (reply 'GoodMorning) 'Hi)
+(check-expect (reply 'HowAreYou?) 'Fine)
+\end{lstlisting}
